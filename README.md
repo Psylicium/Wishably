@@ -1,7 +1,7 @@
 # Ønskesedlen
 A tool for coordinating presents.
 
-We all know the drill: It's soon christmas, and you have to figure out both your own wishes, and what to give others. It can be a pain to coordinate properly with a lot of mailing/calling/texting to figure out who buys what to whom. With this easy-to-use tool, the participants can write their wishes, see other people's, and reserve/unreserve gifts.
+We all know the drill: It's christmas really soon, and you have to figure out both your own wishes, and what to give others. It can be a pain to coordinate properly with a lot of mailing/calling/texting to figure out who buys what to whom. With this easy-to-use tool, the participants can write their wishes, see other people's, and reserve/unreserve gifts.
 
 ## Requirements
 
@@ -37,7 +37,7 @@ $mailfrom    = "From: Sender Name <sender@mail.address>";
 This should be it! Simple, eh? A text field can be added below the wishlist on the front page (welcome message, instructions etc.), but this is disabled by default. To enable it, open `index.php` and edit the variables at the top:
 
 ```php
-$display_text = 1;
+$display_text = 0;
 $page_text    = 'This is displayed in the text field below the wishlist';
 ```
 
@@ -58,8 +58,8 @@ All participants sign up and get their random 6-digit password, which they sign 
 Let's take a christmas present example:
 
 1. Phoebe wish for a book, some earrings and four new winter tires, so she adds them to "My Wishlist". These wishes will be shown on the index page for all to see (and reserve).
-2. Now Chandler comes by to enter some of his wishes as well. He sees that Phoebe wants some tires and a book, so he reserves these wishes. Since they are now taken, they won't be displayed on the index page anymore. Chandler can still see them under "My Reservations" - and of course Phoebes also still sees them under "My Wishlist".
-3. Phoebe can edit or delete her wishes at any time, but you should use this WITH CAUTION! She can't see which presents have already been reserved - or perhaps even bought. (That would ruin the whole purpose, right?)...
+2. Now Chandler comes by to enter some of his wishes as well. He sees that Phoebe wants some tires and a book, so he reserves those wishes. Since they are now taken, they won't be displayed on the index page anymore. Chandler can still see them under "My Reservations" - and of course Phoebe also still sees them under "My Wishlist".
+3. Phoebe can edit or delete her wishes at any time, but she should use this WITH CAUTION! She can't see which of her presents have been reserved - or perhaps even bought. (That would also ruin the whole surprise, right?)...
 4. If Chandler get second thoughts, or can't afford the tires, he can unreserve them. The wish now becomes available, and is yet again shown on the front page for others to reserve.
 
 By doing it like this, everyone can see what other people wish for, and it's shown in a nice and clean way to avoid accidentally getting the same gift from different people.
