@@ -1,5 +1,5 @@
 # Ønskesedlen
-A tool for coordinating and exchanging presents.
+A tool for coordinating presents.
 
 We all know the drill: It's soon christmas, and you have to figure out both your own wishes, and what to give others. It can be a pain to coordinate properly with a lot of mailing/calling/texting to figure out who buys what to whom. With this easy-to-use tool, the participants can write their wishes, see other people's, and reserve/unreserve gifts.
 
