@@ -76,7 +76,7 @@ By doing it like this, everyone can see what other people wish for, and it's sho
 
 ## Credits
 
-This was created in January 2017 by Henrik Mortensen (http://psylicium.dk). Read more about it (in Danish) and try a live demo at http://psylicium.dk/oenskesedlen/. Background image courtesy of Rolf Schweizer Fotografie (https://www.flickr.com/photos/schweizerrolf/23543699950/).
+This was created in January 2017 by Henrik Mortensen (http://psylicium.dk). Read more about it (in Danish) and try a live demo at http://psylicium.dk/oenskesedlen/. Background image by Rolf Schweizer Fotografie (https://www.flickr.com/photos/schweizerrolf/23543699950/).
 
 ## License
 
