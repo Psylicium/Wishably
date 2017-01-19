@@ -3,6 +3,8 @@ A tool for coordinating presents.
 
 We all know the drill: It's christmas really soon, and you have to figure out both your own wishes, and what to give to others. It can be a pain to coordinate properly with a lot of mailing/calling/texting back and forth to figure out who buys what to whom. With this easy-to-use tool, the participants can write their own wishes, see other people's, and reserve/unreserve gifts.
 
+You can try a demo at http://projects.psylicium.dk/onskedemo/
+
 ## Requirements
 
 All you need is a webhost which supports PHP, and access to an MySQL database.
@@ -76,7 +78,7 @@ By doing it like this, everyone can see what other people wish for, and it's sho
 
 ## Credits
 
-This was created in January 2017 by Henrik Mortensen (http://psylicium.dk). Read more about it (in Danish) and try a live demo at http://psylicium.dk/oenskesedlen/. Background image by Rolf Schweizer Fotografie (https://www.flickr.com/photos/schweizerrolf/23543699950/).
+This was created in January 2017 by Henrik Mortensen (http://psylicium.dk). Background image by Rolf Schweizer Fotografie (https://www.flickr.com/photos/schweizerrolf/23543699950/).
 
 ## License
 
