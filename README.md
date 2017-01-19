@@ -9,7 +9,7 @@ All you need is a webhost which supports PHP, and access to an MySQL database.
 
 ## Installation
 
-* Create a new empty database, and import the included `/mysql/onskeseddel_dbcreate.sql`. This will create the tables you need.
+* Create a new empty database, and import the included `/mysql/onskeseddel_dbcreate.sql`. This will create the required tables.
 
 * Set the necessary variables for connecting to the database in `conxion.php`:
 
