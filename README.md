@@ -44,6 +44,8 @@ $page_text    = 'This is displayed in the text field below the wishlist';
 `$display_text` sets whether the text field is shown. `0` disables it, `1` enables it.
 `$page_text` contains the text you want to show. You can use standard HTML formatting.
 
+The application is multilingual, and can be displayed in whatever language is translated into. You can set the display language in `header.php` by changing `include('lang/lang_XX.php')` where XX being the language. Check `/lang/languages.txt` for more info.
+
 If you want to clear the database and start over next christmas, you can either:
 * have each user login and delete their profile (email address, wishes and reservations)
 * manually empty (truncate) the tables, or
