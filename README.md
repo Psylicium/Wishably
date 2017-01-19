@@ -69,7 +69,7 @@ By doing it like this, everyone can see what other people wish for, and it's sho
 ## History
 
 * `2017/01/19` Version 1.01:
- - Minor bugfixes
+	Minor bugfixes
 
 * `2017/01/16` Version 1.0 released. As I originally made this in danish, this is of course best suited for people understanding the language. I will add some easy-to-use translation functionality in the next version, which will (hopefully) be released very soon.
 
