@@ -31,7 +31,7 @@ $dbpassword = "<DATABASE_PASSWORD>";
 $dbname     = "<DATABASE_NAME>";
 ```
 
-* Open `register.php` and enter your invite code and mail settings (where the registration mail with the password will be sent from):
+* Open `register.php` and enter your custom invite code and mail settings (where the registration mail with the password will be sent from):
 
 ```php
 $invite_code = "<INVITATION_CODE>";
