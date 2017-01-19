@@ -1,4 +1,6 @@
-This is where the languages for the app resides. If you want to make a translation file in your own language (which is not already in the list), download the lang_en.php file, translate it, rename it to "lang_<yourlanguage>.php" and send it to me at psylicium@gmail.com, so I can include it. A detailed how-to is in the language file. Thanks :)
+This is where the languages for the app resides. If you want to make a translation file in your own language (which is not already
+in the list), download the lang_en.php file, translate it, rename it to "lang_<yourlanguage>.php" and send it to me at
+psylicium@gmail.com, so I can include it. A detailed how-to is in the language file. Thanks :)
 
 At the moment, the following translations are available:
 
