@@ -49,7 +49,7 @@ The application is multilingual, and can be displayed in whatever language it is
 If you want to clear the database and start over next christmas, you can either:
 * have each user login and delete their profile (email address, wishes and reservations)
 * manually empty (truncate) the tables, or
-* import the onskeseddel_dbimport.sql again
+* import `/mysql/onskeseddel_dbcreate.sql` again
 
 I may add some admin functionality, so the user profiles and the database can be managed in frontend, but until now, this'll have to do :)
 
