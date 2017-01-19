@@ -3,6 +3,8 @@ A tool for coordinating presents.
 
 We all know the drill: It's christmas really soon, and you have to figure out both your own wishes, and what to give to others. It can be a pain to coordinate properly with a lot of mailing/calling/texting back and forth to figure out who buys what to whom. With this easy-to-use tool, the participants can write their own wishes, see other people's, and reserve/unreserve gifts.
 
+## Demo
+
 You can try a demo at http://projects.psylicium.dk/onskedemo/
 
 ## Requirements
