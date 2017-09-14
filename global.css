@@ -21,8 +21,8 @@ body {font: 16px "Varela Round", Helmet, Freesans, sans-serif; -webkit-text-size
 /* We like off-black for text. */
 body, select, input, textarea {color: #666;}
 
-a {color: #8be; text-decoration:none;}
-a:hover {color: #bef; text-decoration:none;}
+a {color: #3f9; text-decoration:none;}
+a:hover {color: #fff; text-decoration:none;}
 
 /* Custom text-selection colors (remove any text shadows: http://twitter.com/miketaylr/status/12228805301) */
 ::-moz-selection{background: #dae5a1; color: #000; text-shadow: none;}
@@ -52,7 +52,7 @@ html, body {
 	font-family: Arial, sans-serif;
 	font-size: 16px;
 	color: #eee;
-	background: url('background_cat.jpg') no-repeat center center fixed;
+	background: url('background.jpg') no-repeat center center fixed;
 	background-size: cover;
 }
 
@@ -63,6 +63,11 @@ h1 {
 	margin-bottom: .5em;
 	color: #fff;
 	font-weight: normal;
+	text-shadow: 2px 2px 1px rgba(0,0,0,.5);
+}
+
+h1.center {
+	text-align: center;
 }
 
 a {
@@ -71,7 +76,8 @@ a {
 
 td {
 	border-bottom: 1px solid #ddd;
-	padding: 1em;
+	padding: .75em;
+	vertical-align: middle;
 }
 
 tr.tablehead {
@@ -98,6 +104,37 @@ td.gift {
 
 td.actions, td.author {
 	white-space: nowrap;
+}
+
+td a {
+	color: #09c;
+}
+
+td a:hover {
+	color: #0cf;
+}
+
+td.actions a {
+    padding: 0.5em 1em;
+    display: inline-block;
+    font-size: .8em;
+    margin: 0 .5em 0 0;
+	color: #fff;
+	border-radius: 5px;
+}
+
+td.actions a:last-child {
+	margin: 0px;
+}
+
+td.actions a.edit, td.actions a.reserve {
+	border: 1px solid #267;
+	background-color: #59a;
+}
+
+td.actions a.delete, td.actions a.unreserve {
+	border: 1px solid #900;
+	background-color: #c00;
 }
 
 .giftlink {
@@ -128,11 +165,6 @@ td.actions, td.author {
 	line-height: 1em;
 	display: inline-block;
 	padding: 0px .75em;
-	color: #8be;
-}
-
-.headerbar ul li a:hover {
-	color: #bef;
 }
 
 .headerbar ul li a.logout, .headerbar ul li a.deleteuser {
@@ -157,6 +189,11 @@ td.actions, td.author {
 	line-height: 2em;
 }
 
+.headerbar ul li.admin a {
+	color: #fa0;
+	font-size: .75em;
+}
+
 .headerbar ul li p {
 	line-height: 1em;
 	padding: 0px .75em;
@@ -178,6 +215,7 @@ td.actions, td.author {
 }
 
 form {
+	margin: 0px auto;
 	background-color: #444;
 	border-radius: 10px;
 	box-shadow: 0px 0px 20px rgba(0,0,0,.25);
@@ -201,6 +239,11 @@ form input {
 	padding: .75em;
 	font-size: 1.25em;
 	box-sizing: border-box;
+}
+
+form input::placeholder {
+	font-style: italic;
+	color: #bbb;
 }
 
 form button {
@@ -281,7 +324,7 @@ span.disabled {
 }
 
 .alert {
-	background-color: #a00;
+	background-color: #444;
 	padding: 1em;
 	width: 50%;
 	text-align: center;
@@ -296,13 +339,24 @@ span.disabled {
 }
 
 code {
-	font-family: Consolas;
+	font-size: .8em;
+	background-color: #000;
+	padding: 2px .5em;
+	border-radius: 3px;
 	color: #fff;
 }
 
 .status {
 	padding: 1em;
 	border-radius: 5px;
+	background-color: #444;
+	border: 1px solid #333;
+}
+
+.status.center {
+	margin: 0px auto;
+	line-height: 1.5em;
+	width: 60%;
 }
 
 .status a {
@@ -323,10 +377,29 @@ code {
 
 .status p {
 	margin-bottom: 1em;
+	line-height: 1.5em;
 }
 
 .status p:last-child {
 	margin-bottom: 0px;
+}
+
+.status span.red {
+	color: #f00;
+	padding-right: .5em;
+}
+
+.status span.green {
+	color: #0f0;
+	padding-right: .5em;
+}
+
+.status .redir {
+	font-size: .8em;
+	line-height: 1em;
+	text-align: right;
+	border-top: 1px dashed #999;
+	padding-top: .75em;
 }
 
 input.honey {
@@ -349,4 +422,104 @@ ol li {
 	font-size: .75em;
 	color: #999;
 	text-align: center;
+}
+
+.regstatus {
+	margin-bottom: 1em;
+	padding: 0em 1em;
+	font-size: 14px;
+	border-radius: 5px;
+}
+
+.regstatus.err {
+	background-color: #800;
+}
+
+.regstatus ul {
+	display: inline-block;
+}
+
+.regstatus li {
+	background-repeat: no-repeat;
+	line-height: 14px;
+}
+
+.regstatus li.err {
+	background-position: 0px 0px;
+	margin: .75em 0;
+}
+
+.users {
+	
+	font-family: Verdana, Arial, sans-serif;
+	font-size: .8em;
+	margin-top: 1.5em;
+	text-align: center;
+	text-shadow: 1px 1px 1px #000;
+}
+
+/* ADMIN STYLES
+-------------------------------------------------------------------------------*/
+
+body.admin {
+	background: url('admin-background.jpg') no-repeat top center fixed;
+	background-size: cover;
+}
+
+.headerbar-admin {
+	background-color: #000;
+	padding: 20px .75em;
+	margin-bottom: 5em;
+}
+
+.admin .wrapper p {
+	margin-bottom: 3em;
+	line-height: 1.5em;
+}
+
+.admin .wrapper form {
+	border: 3px solid;
+	padding: 1em;
+}
+
+.admin .wrapper form input[type=checkbox] {
+	display: none;
+}
+
+.admin .wrapper form input[type=checkbox] + label span {
+	display: inline-block;
+    width: 30px;
+    height: 30px;
+    margin: -3px 10px 0 0;
+    vertical-align: middle;
+	background-color: #999;
+	border-radius: 50%;
+	border: 3px solid #666;
+}
+
+.admin .wrapper form input[type=checkbox]:checked + label span {
+	background:#0f0;
+	border: 3px solid #0c0;
+}
+
+label {
+	display: inline-block;
+	margin-top: 3px;
+}
+
+.admin .wrapper form input[type=checkbox] ~ button {
+    display: none;
+}
+
+.admin .wrapper form input[type=checkbox]:checked ~ button {
+    display: block;
+	margin-top: .5em;
+}
+
+.admin .wrapper .status p {
+	margin-bottom: .5em;
+}
+
+.admin .wrapper .status p:last-child {
+	margin-bottom: 0em;
 }

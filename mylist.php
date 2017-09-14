@@ -13,12 +13,12 @@ $stmt->bind_result($gift_id, $gift_desc, $gift_link, $gift_reserved); ?>
 <form action="gift.php?do=addnew" method="POST">
 	<fieldset>
 		<table>	
-			<tr class="tablehead"><td class="gift"><?php echo $lang['tbl_description']; ?></td><td class="actions"><?php echo $lang['tbl_actions']; ?></td></tr>
+			<tr class="tablehead"><td class="gift"><?php echo $lang['tbl_wish']; ?></td><td class="actions"><?php echo $lang['tbl_actions']; ?></td></tr>
 			
 			<?php while ($stmt->fetch()) { ?>
 				<tr>
 					<td class="gift"><?php echo $gift_desc; if ($gift_link) { echo '<div class="giftlink"><a title="' . $lang['tbl_linkalt'] . '" href="' . $gift_link . '" target="_blank">'.$gift_link.'</a></div>'; } ?></td>
-					<td class="actions"><?php /* if ( $gift_reserved == "1" ) { echo '<span class="disabled">Ikke muligt</span>'; } else { */ echo '<a href="gift.php?do=edit&amp;id=' . $gift_id . '">' . $lang['edit'] . '</a><br /><a href="gift.php?do=delete&amp;id=' . $gift_id . '">' . $lang['delete'] . '</a>'; /* } ) */ ?></td>
+					<td class="actions"><?php echo '<a class="edit" href="gift.php?do=edit&amp;id=' . $gift_id . '">' . $lang['edit'] . '</a><a class="delete" href="gift.php?do=delete&amp;id=' . $gift_id . '">' . $lang['delete'] . '</a>'; /* } ) */ ?></td>
 				</tr>
 			<?php } ?>
 			

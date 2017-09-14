@@ -2,9 +2,9 @@
 -- version 3.5.8.1
 -- http://www.phpmyadmin.net
 --
--- Generation Time: Jan 19, 2017 at 07:06 AM
--- Server version: 5.5.53-MariaDB-1~wheezy
--- PHP Version: 5.4.45-0+deb7u6
+-- Generation Time: Sep 14, 2017 at 10:24 AM
+-- Server version: 10.1.26-MariaDB-1~xenial
+-- PHP Version: 5.4.45-0+deb7u11
 
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -30,7 +30,7 @@ CREATE TABLE IF NOT EXISTS `gifts` (
   `gift_reserved` int(10) NOT NULL,
   `reserved_by` int(10) DEFAULT NULL,
   UNIQUE KEY `gift_id` (`gift_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_danish_ci AUTO_INCREMENT=196 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_danish_ci AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -42,11 +42,13 @@ DROP TABLE IF EXISTS `users`;
 CREATE TABLE IF NOT EXISTS `users` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
   `username` varchar(20) COLLATE utf8_danish_ci NOT NULL,
-  `password` varchar(20) COLLATE utf8_danish_ci NOT NULL,
+  `password` varchar(255) COLLATE utf8_danish_ci NOT NULL,
   `email` varchar(50) COLLATE utf8_danish_ci NOT NULL,
+  `admin` tinyint(1) NOT NULL DEFAULT '0',
+  `token` varchar(64) COLLATE utf8_danish_ci DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `id` (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_danish_ci AUTO_INCREMENT=71 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_danish_ci AUTO_INCREMENT=1 ;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

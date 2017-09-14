@@ -19,8 +19,8 @@ case "delete":
 			// Check that only the owner can delete his/her gift, otherwise redirect to index page
 			if ( ($stmt->affected_rows) == 1 ) { ?>
 				
-				<h1><?php echo $lang['deletewish']; ?></h1>
-				<form class="padding" action="gift.php?do=delete" method="POST">
+				<h1 class="center"><?php echo $lang['deletewish']; ?></h1>
+				<form class="login padding" action="gift.php?do=delete" method="POST">
 					<fieldset>		
 						<?php echo $lang['wanttodelete']; ?> <b><?php echo $gift_desc; ?></b>?
 						<div class="clearfix"></div>
@@ -35,14 +35,29 @@ case "delete":
 		 } else {
 		
 			// If gift id and user id match, delete the gift
+			$gid = e($_POST["gid"]);
+			$uid = e($_COOKIE["UID"]);
+			$status = array();
 			include("conxion.php");
 			$sql = "DELETE FROM `gifts` WHERE gift_id = ? AND gift_owner = ?";
 			$stmt = $db_conx->prepare($sql);
-			$stmt->bind_param('is', e($_POST["gid"]), $_COOKIE["UID"]);
-			$stmt->execute();
+			$stmt->bind_param('is', $gid, $uid);
 			
-			echo '<script src="js.js"></script>'; echo '<div class="status ok">' . $lang['wishisdeleted'] . '</div>';
-			header("refresh:3;url=mylist.php" );
+			if (!$stmt->execute()) {
+				$status[] = '<span class="red">&#x2716;</span>' . $lang['wishnotdeleted'];
+			} else {
+				$status[] = '<span class="green">&#x2714;</span>' . $lang['wishisdeleted'];
+			}
+			
+			echo '<div class="status center">';
+			foreach ($status as $stat) {
+				echo '<p>' . $stat . '</p>';
+				echo $lang['redir-wishlist'];
+			}
+			echo '</div>';
+			
+			echo '<script src="js.js"></script>';
+			header("refresh:5;url=mylist.php" );
 			exit;
 		
 		}
@@ -91,24 +106,30 @@ case "delete":
 		$gid  = e($_POST["gid"]);
 		
 		// Update the database
+		$status = array();
 		include("conxion.php");
 		$sql = "UPDATE `gifts` SET `gift_desc`=?,`gift_link`=? WHERE `gift_id`=?";
 		$stmt = $db_conx->prepare($sql);
-		$stmt->bind_param('ssi', $desc, $link, e($_POST["gid"]));
+		$stmt->bind_param('ssi', $desc, $link, $gid);
 		$stmt->execute();
 		
 		// If updating failed
 		if ( ($stmt->affected_rows) == 0 ) {
+				$status[] = '<span class="red">&#x2716;</span>' . $lang['wishnotupdated'];
+			} else {
+				$status[] = '<span class="green">&#x2714;</span>' . $lang['wishupdated'];
+			}
+			
+			echo '<div class="status center">';
+			foreach ($status as $stat) {
+				echo '<p>' . $stat . '</p>';
+			}
+			echo $lang['redir-wishlist'];
+			echo '</div>';
+			
 			echo '<script src="js.js"></script>';
-			echo '<div class="status error">' . $lang['wishnotupdated'] . '</div>';
 			header("refresh:5;url=mylist.php" );
-		
-		// If updating was successful
-		} else {
-			echo '<script src="js.js"></script>';
-			echo '<div class="status ok">' . $lang['wishupdated'] . '</div>';
-			header("refresh:3;url=mylist.php" );
-		}
+			exit;
 	
 	break;
 	
@@ -129,6 +150,7 @@ case "delete":
 		
 		<?php } else {
 		
+			$status = array();
 			$desc = e($_POST["gift-desc"]);
 			$link = e($_POST["gift-link"]);
 			$uid  = $_COOKIE["UID"];
@@ -138,20 +160,23 @@ case "delete":
 			$sql = "INSERT INTO `gifts` (gift_desc, gift_link, gift_owner) VALUES (?, ?, ?)";
 			$stmt = $db_conx->prepare($sql);
 			$stmt->bind_param('sss', $desc, $link, $uid);
-			$stmt->execute();
-		
-			// If adding was successful
-			if ( ($stmt->affected_rows) == 1 ) {
-				echo '<script src="js.js"></script>';
-				echo '<div class="status ok">' . $lang['wishsaved'] . '</div>';
-				header("refresh:3;url=mylist.php" );
-				exit;
-				
-			// If adding failed
-			} else echo '<script src="js.js"></script>';
-				echo '<div class="status error">' . $lang['wishnotsaved'] . '</div>';
-				header("refresh:3;url=mylist.php" );
-				exit;
+			
+			if (!$stmt->execute()) {
+				$status[] = '<span class="red">&#x2716;</span>' . $lang['wishnotsaved'];
+			} else {
+				$status[] = '<span class="green">&#x2714;</span>' . $lang['wishsaved'];
+			}
+			
+			echo '<div class="status center">';
+			foreach ($status as $stat) {
+				echo '<p>' . $stat . '</p>';
+			}
+			echo $lang['redir-wishlist'];
+			echo '</div>';
+			
+			echo '<script src="js.js"></script>';
+			header("refresh:5;url=mylist.php" );
+			exit;
 				
 		}
 			
@@ -178,14 +203,14 @@ case "delete":
 		// - otherwise, display reservations
 		} else {
 		
-			$stmt->bind_result($gift_id, $gift_desc, $gift_link, $gift_owner, $gift_reserved, $reserved_by, $id, $username, $password, $email); ?>
+			$stmt->bind_result($gift_id, $gift_desc, $gift_link, $gift_owner, $gift_reserved, $reserved_by, $id, $username, $password, $email, $admin, $token); ?>
 		
 			<table>
 				<tr class="tablehead"><td><?php echo $lang['tbl_wish']; ?></td><td><?php echo $lang['tbl_wishedby']; ?></td><td><?php echo $lang['tbl_actions']; ?></td></tr>
 				<?php while ($stmt->fetch()) { ?><tr>
 					<td class="gift"><?php echo $gift_desc; if ($gift_link) { echo '<div class="giftlink"><a title="' . $lang['tbl_linkalt'] . '" href="' . $gift_link . '" target="_blank">'.$gift_link.'</a></div>'; } ?></td>
 					<td class="author"><?php echo $username; ?></td>
-					<td class="actions"><a href="gift.php?do=unreserve&amp;gift_id=<?php echo $gift_id; ?>"><?php echo $lang['deletereservation']; ?></a></td>
+					<td class="actions"><a class="unreserve" href="gift.php?do=unreserve&amp;gift_id=<?php echo $gift_id; ?>"><?php echo $lang['deletereservation']; ?></a></td>
 				</tr><?php } ?>
 			</table>
 			
@@ -206,11 +231,11 @@ case "delete":
 			
 			// Check that the gift is reserved by this user
 			if (($stmt->num_rows) == 1 ) {
-				$stmt->bind_result($gift_id, $gift_desc, $gift_link, $gift_owner, $gift_reserved, $reserved_by, $id, $username, $password, $email);
+				$stmt->bind_result($gift_id, $gift_desc, $gift_link, $gift_owner, $gift_reserved, $reserved_by, $id, $username, $password, $email, $admin, $token);
 				$stmt->fetch(); ?>
 			
-				<h1><?php echo $lang['deletereservation']; ?></h1>
-				<form class="padding" action="gift.php?do=unreserve" method="POST">
+				<h1 class="center"><?php echo $lang['deletereservation']; ?></h1>
+				<form class="login padding" action="gift.php?do=unreserve" method="POST">
 					<fieldset>		
 						<?php echo $lang['wanttounreserve']; ?> <?php echo $username; ?>'s <?php echo $lang['wish']; ?> <b><?php echo $gift_desc; ?></b>?
 						<div class="clearfix"></div>
@@ -230,14 +255,25 @@ case "delete":
 		
 			// Update the record
 			include("conxion.php");
+			$gid = e($_POST["gid"]);
 			$sql = "UPDATE `gifts` SET `gift_reserved` = 0, `reserved_by` = NULL WHERE `gift_id` = ?";
 			$stmt = $db_conx->prepare($sql);
-			$stmt->bind_param('i', e($_POST["gid"]));
-			$stmt->execute();
-			echo '<script src="js.js"></script>'; echo '<div class="status error">' . $lang['wishunreserved'] . '</div>';
-			header("refresh:3;url=".$basedir );
+			$stmt->bind_param('i', $gid);
 			
-			}
+			if (!$stmt->execute()) {
+				$stat = '<span class="red">&#x2716;</span>' . $lang['wishnotunreserved'];
+			} else {
+				$stat = '<span class="green">&#x2714;</span>' . $lang['wishunreserved'];
+			};
+					
+			echo '<div class="status center">';
+			echo '<p>' . $stat . '</p>';
+			echo $lang['redir-reservation'];
+			echo '</div>';
+			echo '<script src="js.js"></script>'; 
+			header("refresh:5;url=gift.php?do=myreservations" );
+			
+		}
 	
 		break;
 	
@@ -252,7 +288,7 @@ case "delete":
 				$stmt->bind_param('s', $_GET['gift_id']);
 				$stmt->execute();
 				$stmt->store_result();
-				$stmt->bind_result($gift_id, $gift_desc, $gift_link, $gift_owner, $gift_reserved, $reserved_by, $id, $username, $password, $email);
+				$stmt->bind_result($gift_id, $gift_desc, $gift_link, $gift_owner, $gift_reserved, $reserved_by, $id, $username, $password, $email, $admin, $token);
 				$stmt->fetch();
 		
 				// If gift doesn't exist OR user is trying to reserve a gift that's already reserved OR reserve his/her own gift, redirect to index page
@@ -260,10 +296,10 @@ case "delete":
 				
 					header("Location:".$basedir );
 					
-				}  else { ?>
+			}  else { ?>
 		
-					<h1><?php echo $lang['reservewish']; ?></h1>
-					<form class="padding" action="gift.php?do=reserve" method="POST">
+					<h1 class="center"><?php echo $lang['reservewish']; ?></h1>
+					<form class="login padding" action="gift.php?do=reserve" method="POST">
 						<fieldset>		
 							<?php echo $lang['wanttoreserve']; ?> <?php echo $username; ?>'s <?php echo $lang['wish']; ?> <b><?php echo $gift_desc; ?></b>?
 							<div class="clearfix"></div>
@@ -281,14 +317,22 @@ case "delete":
 					$sql = "UPDATE `gifts` SET gift_reserved = 1, reserved_by = ? WHERE gift_id = ?";
 					$stmt = $db_conx->prepare($sql);
 					$stmt->bind_param('ss', $_COOKIE["UID"], $_POST['gid']);
-					$stmt->execute();
-					echo '<script src="js.js"></script>'; echo '<div class="status ok">' . $lang['wishreserved'] . '</div>';
-					header("refresh:3;url=".$basedir );
-				
-				}
-			
+					if (!$stmt->execute()) {
+						$stat = '<span class="red">&#x2716;</span>' . $lang['wishnotreserved'];
+					} else {
+						$stat = '<span class="green">&#x2714;</span>' . $lang['wishreserved'];
+					};
+					
+					echo '<div class="status center">';
+					echo '<p>' . $stat . '</p>';
+					echo $lang['redir-index'];
+					echo '</div>';
+					echo '<script src="js.js"></script>'; 
+					header("refresh:5;url=".$basedir );
+			}
+
 		break;
-	
+
 	// Direct access redirects to index page
 	default: header("Location:".$basedir );
 

@@ -10,59 +10,75 @@ if (isset($_POST['submit'])) {
 	require_once("func.php");
 	
 	// Check credentials
+	$uid = e($_COOKIE["UID"]);
+	$profidelete = e($_POST['profidelete']);
 	$sql = "SELECT * FROM `users` WHERE id = ? AND email = ?";
 	$stmt = $db_conx->prepare($sql);
-	$stmt->bind_param('is', e($_COOKIE["UID"]), e($_POST['profidelete']));
+	$stmt->bind_param('is', $uid, $profidelete);
 	$stmt->execute();
 	$stmt->store_result();
-	$stmt->bind_result($id, $username, $password, $email);
+	$stmt->bind_result($id, $username, $password, $email, $admin, $token);
 	$stmt->fetch();
 	
 	// If no rows are found (i.e. id and email doesn't match), throw an error
 	if ( ($stmt->affected_rows) != 1 ) {
-	
-		echo '<script src="js.js"></script>'; echo '<div class="status error">' . $lang['del-notauthorized']. '</div>';
-		header("refresh:3;url=".$basedir );
-		exit;
+		
+		header("Location:".$basedir );
 	
 	} else {
-	
-		echo '<div class="status ok">';
+		
+		$status = array();
 		
 			// Unsetting reservations
 			include("conxion.php");
 			$sql = "UPDATE `gifts` SET `gift_reserved` = 0, `reserved_by` = NULL WHERE `reserved_by` = ?";
 			$stmt = $db_conx->prepare($sql);
-			$stmt->bind_param('i', e($_COOKIE['UID']));
-			if ($stmt->execute()) { echo '<p>&#x2714; ' . $lang['del-userres'] . '</p>'; } else { echo '<p>&#x2716; ' . $lang['del-userres-err'] . '</p>'; };
+			$stmt->bind_param('i', $uid);
+			if (!$stmt->execute()) {
+				$status[] = '<span class="red">&#x2716;</span>' . $lang['del-userres-err'];
+			} else {
+				$status[] = '<span class="green">&#x2714;</span>' . $lang['del-userres'];
+			}
 			
 			// Remove the user's gifts from the database
 			$sql = "DELETE FROM `gifts` WHERE gift_owner = ?";
 			$stmt = $db_conx->prepare($sql);
-			$stmt->bind_param('i', $_COOKIE["UID"]);
-			if ($stmt->execute()) { echo '<p>&#x2714; ' . $lang['del-userwish'] . '</p>'; } else { echo '<p>&#x2716; ' . $lang['del-userwish-err'] . '</p>'; };
+			$stmt->bind_param('i', $uid);
+			if (!$stmt->execute()) {
+				$status[] = '<span class="red">&#x2716;</span>' . $lang['del-userwish-err'];
+			} else {
+				$status[] = '<span class="green">&#x2714;</span>' . $lang['del-userwish'];
+			}
 			
 			// Remove the user from the database
 			$sql = "DELETE FROM `users` WHERE id = ? AND email = ? LIMIT 1";
 			$stmt = $db_conx->prepare($sql);
-			$stmt->bind_param('is', e($_COOKIE["UID"]), e($_POST['profidelete']));
+			$stmt->bind_param('is', $uid, $profidelete);
 			$stmt->store_result();
-			if ($stmt->execute()) { echo '<p>&#x2714; ' . $lang['del-user'] . '</p>'; } else { echo '<p>&#x2716; ' . $lang['del-user-err'] . '</p>'; };
+			if (!$stmt->execute()) {
+				$status[] = '<span class="red">&#x2716;</span>' . $lang['del-user-err'];
+			} else {
+				$status[] = '<span class="green">&#x2714;</span>' . $lang['del-user'];
+			}
+			
+			echo '<div class="status center">';
+			foreach ($status as $stat) {
+				echo '<p>' . $stat . '</p>';
+			}
+			echo $lang['redir-logoutdel'];
+			echo '</div>';
 			
 			// Unsetting cookie and redirect to index page
 			echo '<script src="js.js"></script>';
-			echo '<p>' . $lang['del-loggingout'] . '</p>';
-			header("refresh:3;url=".$basedir."?logout=true" );
-		
-		echo '</div>';
+			header("refresh:5;url=/?logout=true" );
 		
 		}
 		
 	} else { ?>
 
-	<h1><?php echo $lang['deleteuser']; ?></h1>
+	<h1 class="center"><?php echo $lang['deleteuser']; ?></h1>
 	
-	<form class="padding" action="delete.php" method="POST">
+	<form class="login padding" action="delete.php" method="POST">
 		<fieldset>		
 			<input id="textinput" name="profidelete" type="email" class="input-nopad" placeholder="<?php echo $lang['ph_emailadd']; ?>" autocomplete="off" required>
 			<div class="input-note"><?php echo $lang['delete-note']; ?></div>

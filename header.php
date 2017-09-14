@@ -1,17 +1,17 @@
 <?php session_start(); ob_start();
-
-// Select the display language. Refer to the /lang/languages.txt file for more information.
-include('lang/lang_en.php'); ?>
+include("func.php");
+?>
 
 <?php
 
 if ($_GET['logout'] == "true" ) {
+	session_unset();
 	unset($_COOKIE["UID"]);
-	setcookie("UID", "", time()-3600);
+	setcookie("UID", "", time()-3600);	
 }
 
 include("conxion.php");
-include("func.php");
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -28,15 +28,15 @@ include("func.php");
 <?php if (isset($_COOKIE["UID"])) {
 
 	include("conxion.php");
-	$sql = "SELECT username FROM users WHERE id = ?";
+	$sql = "SELECT username, admin FROM users WHERE id = ?";
 	$stmt = $db_conx->prepare($sql);
 	$stmt->bind_param('s', $_COOKIE["UID"]);
 	$stmt->execute();
 	$stmt->store_result();
-	$stmt->bind_result($username);
+	$stmt->bind_result($username, $admin);
 	$stmt->fetch();
 	if (($stmt->num_rows) == 0 ) {
-		header("Location:/?logout=true" );
+		header("Location:/?logout=true");
 	} ?>
 	
 	<ul>
@@ -45,6 +45,10 @@ include("func.php");
 		<li><a href="mylist.php"><?php echo $lang['mywishlist']; ?></a></li>
 		<li><a href="gift.php?do=myreservations"><?php echo $lang['myreservations']; ?></a></li>
 		<li><p><a class="deleteuser" href="delete.php"><?php echo $lang['deleteuser']; ?></a></p></li>
+		<?php if ($admin == TRUE) { ?>
+			<li class="admin"><a href="/admin/admin.php?do=delwish"><?php echo $lang['adm-delwish']; ?></a></li>
+			<li class="admin"><a href="/admin/admin.php?do=delall"><?php echo $lang['adm-delall']; ?></a></li>
+		<?php } ?>
 	</ul>
 
 <?php } else { ?>

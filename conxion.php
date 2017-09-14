@@ -13,7 +13,7 @@ $dbpassword = "<DATABASE_PASSWORD>";
 $dbname     = "<DATABASE_NAME>";
 
 // Connect to database
-@$db_conx = new mysqli($dbhost, $dbusername, $dbpassword, $dbname);
+$db_conx = new mysqli($dbhost, $dbusername, $dbpassword, $dbname);
 if(mysqli_connect_errno()) {
 	die('Database error.');
 exit();
