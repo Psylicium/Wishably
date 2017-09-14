@@ -92,7 +92,7 @@ By doing it like this, everyone can see what other people wish for, and it's sho
 
 ## History
 
-* `2017/09/14`: _Version 2.0_
+* 2017/09/14: _Version 2.0_
 	- __Added:__ Frontend administration for basic database operations
 	- __Added:__ The option for users to select their own password
 	- __Added:__ The option for users to reset and set a new password
@@ -100,11 +100,11 @@ By doing it like this, everyone can see what other people wish for, and it's sho
 	- __Changed:__ Rearranged some of the variables across files
 	- __Changed:__ Made some minor cosmetic adjustments
 
-* `2017/01/19`: _Version 1.01_
+* 2017/01/19: _Version 1.01_
 	- Minor bugfixes
 	- __Added:__ Language support
 
-* `2017/01/16:` _Version 1.0_
+* 2017/01/16: _Version 1.0_
 	- Committed to GitHub. As I originally made this in danish, this is of course best suited for people understanding the language. I will add some easy-to-use translation functionality in the next version, which will (hopefully) be released very soon.
 
 ## Credits
