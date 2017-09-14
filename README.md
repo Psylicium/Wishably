@@ -9,7 +9,7 @@ You can try a demo at http://projects.psylicium.dk/onskedemo/
 
 ## Requirements
 
-All you need is a webhost which supports PHP, and access to an MySQL database.
+All you need is a webhost which supports PHP 7.0, and access to a MySQL database.
 
 ## Installation
 
@@ -31,14 +31,30 @@ $dbpassword = "<DATABASE_PASSWORD>";
 $dbname     = "<DATABASE_NAME>";
 ```
 
-* Open `register.php` and enter your custom invite code and mail settings (where the registration mail with the password will be sent from):
+* Open `func.php` and enter som bacic settings for your site:
+
+An invite code and mail settings (where the registration mail with the password will be sent from):
 
 ```php
-$invite_code = "<INVITATION_CODE>";
 $mailfrom    = "From: Sender Name <sender@mail.address>";
+$invite_code = "<INVITE_CODE>";
 ```
 
-This should be it! Simple, eh? A text field can be added below the wishlist on the front page (welcome message, instructions etc.), but this is disabled by default. To enable it, open `index.php` and edit the variables at the top:
+The title of your site:
+
+```php
+define("SITENAME", "Wishably");
+```
+
+The language (refer to /lang/languages.txt for supported languages):
+
+```php
+include('lang/lang_en.php');
+```
+
+This should be it! Simple, eh?
+
+A text field can be added below the wishlist on the front page (welcome message, instructions etc.), but this is disabled by default. To enable it, open `index.php` and edit the variables at the top:
 
 ```php
 $display_text = 0;
@@ -48,18 +64,22 @@ $page_text    = 'This is displayed in the text field below the wishlist';
 `$display_text` sets whether the text field is shown. `0` disables it, `1` enables it.
 `$page_text` contains the text you want to show. You can use standard HTML formatting.
 
-The application is multilingual, and can be displayed in whatever language it is translated into. You can set the display language in `header.php` by changing `include('lang/lang_XX.php')` where XX being the language. Check `/lang/languages.txt` for more info and current translations.
+You can also display a list of the registered users at the bottom of the wish list:
 
-If you want to clear the database and start over next christmas, you can either:
-* have each user login and delete their profile (email address, wishes and reservations)
-* manually empty (truncate) the tables, or
-* import `/mysql/onskeseddel_dbcreate.sql` again
+```$display_users = 1;```
 
-I may add some admin functionality, so the user profiles and the database can be managed in frontend, but until now, this'll have to do :)
+This is enabled by default, but you can disable it by setting `$display_users = 0;` in `index.php`:
+
+The application is multilingual, and can be displayed in whatever language it is translated into. You can set the display language in `func.php` by changing `include('lang/lang_XX.php')` where XX being the language. Check `/lang/languages.txt` for more info and current translations.
+
+For easy management, I have included an admin section where you can either delete all current wishes (but leaving user information) or wipe the entire database for easy reuse.
+
+### First thing to do after setting up
+After the above steps are completed, the first thing you'll need to do is create an administrator account. This is done by going to __/admin/createadmin.php__ and entering your desired login details. It will set the `admin` cell to 1 in the database. ___You have to delete or rename this file to some random gibberish upon completion___ - otherwise, anyone can gain admin rights.
 
 ## Usage
 
-All participants sign up and get their random 6-digit password, which they sign in with. The registration process should be spam-proof using a honeypot to fool bots trying to sign up.
+All participants sign up. The registration process should be spam-proof using a honeypot to fool bots trying to sign up. There's also the required invite code to make it extra secure, and that as well prevents strangers from joining.
 
 Let's take a christmas present example:
 
@@ -72,11 +92,20 @@ By doing it like this, everyone can see what other people wish for, and it's sho
 
 ## History
 
-* `2017/01/19` Version 1.01:
-	- Minor bugfixes
-	- Added language support
+* `2017/09/14`: _Version 2.0_
+	- __Added:__ Frontend administration for basic database operations
+	- __Added:__ The option for users to select their own password
+	- __Added:__ The option for users to reset and set a new password
+	- __Fixed:__ Inconsistency in error messages
+	- __Changed:__ Rearranged some of the variables across files
+	- __Changed:__ Made some minor cosmetic adjustments
 
-* `2017/01/16` Version 1.0: Committed to GitHub. As I originally made this in danish, this is of course best suited for people understanding the language. I will add some easy-to-use translation functionality in the next version, which will (hopefully) be released very soon.
+* `2017/01/19`: _Version 1.01_
+	- Minor bugfixes
+	- __Added:__ Language support
+
+* `2017/01/16:` _Version 1.0_
+	- Committed to GitHub. As I originally made this in danish, this is of course best suited for people understanding the language. I will add some easy-to-use translation functionality in the next version, which will (hopefully) be released very soon.
 
 ## Credits
 
