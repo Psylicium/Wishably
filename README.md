@@ -1,4 +1,4 @@
-# Ønskesedlen
+# Wishably
 A tool for coordinating presents.
 
 We all know the drill: It's christmas really soon, and you have to figure out both your own wishes, and what to give to others. It can be a pain to coordinate properly with a lot of mailing/calling/texting back and forth to figure out who buys what to whom. With this easy-to-use tool, the participants can write their own wishes, see other people's, and reserve/unreserve gifts.
@@ -13,7 +13,7 @@ All you need is a webhost which supports PHP 7.0, and access to a MySQL database
 
 ## Installation
 
-* Create a new empty database, and import the included `/mysql/onskeseddel_dbcreate.sql`. This will create the required tables.
+* Create a new empty database, and import the included `/mysql/dbcreate.sql`. This will create the required tables.
 
 * Set the necessary variables for connecting to the database in `conxion.php`:
 
