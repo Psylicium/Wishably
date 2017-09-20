@@ -131,10 +131,9 @@ $lang = array(
 		
 		'mail-body'			=> "Hej ".x($_POST['username']).", og velkommen til ".SITENAME."!<br /><br />
 								Dine logininformationer er som følger:<br /><br />
-								<code><h3>Email-addresse: ".x($_POST['email'])."<br />
-								Adgangskode&nbsp;&nbsp;&nbsp;: ".x($_POST['password'])."</h3></code>
-		",
-		
+								<b>Email-addresse: ".x($_POST['email'])."<br />
+								Adgangskode: ".x($_POST['password'])."</b><br /><br />",
+								
 		'mail-sign'			=> 'Med venlig hilsen<br />'.SITENAME.'',
 		
 		'mail-subject-lpwd'	=> 'Nulstilling af adgangskode på '.SITENAME.'',

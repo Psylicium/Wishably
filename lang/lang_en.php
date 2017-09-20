@@ -130,9 +130,8 @@ $lang = array(
 		
 		'mail-body'			=> "Hi ".x($_POST['username']).", and welcome to ".SITENAME."!<br /><br />
 								Your login details are as follows:<br /><br />
-								<code><h3>Email address: ".x($_POST['email'])."<br />
-								Password&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: ".x($_POST['password'])."</h3></code>
-		",
+								<b>Email address: ".x($_POST['email'])."<br />
+								Password: ".x($_POST['password'])."</b><br /><br />",
 		
 		'mail-sign'			=> 'Regards,<br />'.SITENAME.'',
 		
