@@ -41,6 +41,7 @@ $lang = array(
 	
 	// ****************************** INDEX PAGE **********************************************************
 	
+		'users'				=> 'Registered users',
 		'login-email'		=> 'Email address',
 		'login-pwd'			=> 'Password',
 		'therearenowishes'	=> 'There are currently no wishes, or you are the only one who have made some.',					
@@ -48,7 +49,6 @@ $lang = array(
 		'tbl_wishedby'		=> 'Wished by',
 		'tbl_actions'		=> 'Actions',
 		'tbl_linkalt'		=> 'Click to go to this page (opens in a new tab)',
-		// 'indexredir'		=> 'Redirecting you to the index page in <span id="counter">3</span> seconds...',
 		'redir-index'		=> '<div class="redir">Redirecting you to the index page in <span id="counter">5</span> seconds... <a href="'.$server.'">or click here</a></div>',
 		'redir-wishlist'	=> '<div class="redir">Redirecting you to your wishlist in <span id="counter">5</span> seconds... <a href="'.$server.'/mylist.php">or click here</a></div>',
 		'redir-reservation'	=> '<div class="redir">Redirecting you to your reservations in <span id="counter">5</span> seconds... <a href="'.$server.'/gift.php?do=myreservations">or click here</a></div>',
@@ -70,7 +70,6 @@ $lang = array(
 		'cancelgoback'		=> '<span style="font-size: .8em;">&#10094; Cancel and go back</span>',
 		'wishisdeleted'		=> 'Your wish is deleted.',
 		'wishnotdeleted'	=> 'Your wish was not deleted.',
-		// 'wishlistredir'		=> 'Redirecting you to your wishlist in <span id="counter">3</span> seconds...',
 		'editwish'			=> 'Edit wish',
 		'wishupdated'		=> 'Your wish is updated.',
 		'wishnotupdated'	=> 'Your wish was not updated. Perhaps you have been logged out, or you didn\'t make any changes.',
