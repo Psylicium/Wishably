@@ -36,14 +36,18 @@ $dbname     = "<DATABASE_NAME>";
 An invite code and mail settings (where the registration mail with the password will be sent from):
 
 ```php
-$mailfrom    = "From: Sender Name <sender@mail.address>";
-$invite_code = "<INVITE_CODE>";
+$mailfrom = "From: Wishably <your@email.com>";
+$invite_code = "<invite-code>";
 ```
 
 The title of your site:
 
 ```php
 define("SITENAME", "Wishably");
+```
+The URL of your site:
+```php
+$basedir = "http://mysite.com/wishably/";
 ```
 
 The language (refer to /lang/languages.txt for supported languages):
@@ -91,6 +95,9 @@ Let's take a christmas present example:
 By doing it like this, everyone can see what other people wish for, and it's shown in a nice and clean way to avoid accidentally getting the same gift from different people.
 
 ## History
+
+* 2017/09/22: _Version 2.1_
+	- __Fixed:__ I noticed some bugs when running the app on a local server, and they should be gone now.
 
 * 2017/09/14: _Version 2.0_
 	- __Added:__ Frontend administration for basic database operations
