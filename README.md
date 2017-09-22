@@ -98,6 +98,7 @@ By doing it like this, everyone can see what other people wish for, and it's sho
 
 * 2017/09/22: _Version 2.1_
 	- __Fixed:__ I noticed some bugs when running the app on a local server, and they should be gone now.
+	- __Changed:__ Changed some settings for global variables and stuff...
 
 * 2017/09/14: _Version 2.0_
 	- __Added:__ Frontend administration for basic database operations
