@@ -12,10 +12,11 @@ $errors = array();
 		
 		// Check the database to see if the user's email exists
 		
+		$email = e($_POST['email']);
 		include("conxion.php");
 		$sql = "SELECT * FROM `users` WHERE email = ?";
 		$stmt = $db_conx->prepare($sql);
-		$stmt->bind_param('s', e($_POST['email']));
+		$stmt->bind_param('s', $email);
 		$stmt->execute();
 		$stmt->store_result();
 		

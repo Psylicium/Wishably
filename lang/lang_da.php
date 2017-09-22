@@ -18,9 +18,6 @@ Danish translation by: Henrik Mortensen (www.psylicium.dk)
 
 */
 
-// For sanitizing POST data in the email
-function x($string) { return htmlentities($string, ENT_QUOTES, 'UTF-8', false); }
-
 $lang = array(
 	
 	// ****************************** NAVIGATION BAR ******************************************************
@@ -49,11 +46,10 @@ $lang = array(
 		'tbl_wishedby'		=> 'Ønsket af',
 		'tbl_actions'		=> 'Handlinger',
 		'tbl_linkalt'		=> 'Klik for at gå til siden (åbner i en ny fane)',
-		// 'indexredir'		=> 'Redirecting you to the index page in <span id="counter">3</span> seconds...',
-		'redir-index'		=> '<div class="redir">Omdirigerer dig til forsiden om <span id="counter">5</span> sekunder... <a href="'.$server.'">eller klik her</a></div>',
-		'redir-wishlist'	=> '<div class="redir">Omdirigerer dig til din ønskeseddel om <span id="counter">5</span> sekunder... <a href="'.$server.'/mylist.php">eller klik her</a></div>',
-		'redir-reservation'	=> '<div class="redir">Omdirigerer dig til dine reservationer om <span id="counter">5</span> sekunder... <a href="'.$server.'/gift.php?do=myreservations">eller klik her</a></div>',
-		'redir-logoutdel'	=> '<div class="redir">Du vil blive logget ud og omdirigeret til forsiden om <span id="counter">5</span> sekunder... <a href="'.$server.'/?do=logout">eller klik her</a></div>',
+		'redir-index'		=> '<div class="redir">Omdirigerer dig til forsiden om <span id="counter">5</span> sekunder... <a href="'.$basedir.'">eller klik her</a></div>',
+		'redir-wishlist'	=> '<div class="redir">Omdirigerer dig til din ønskeseddel om <span id="counter">5</span> sekunder... <a href="'.$basedir.'mylist.php">eller klik her</a></div>',
+		'redir-reservation'	=> '<div class="redir">Omdirigerer dig til dine reservationer om <span id="counter">5</span> sekunder... <a href="'.$basedir.'gift.php?do=myreservations">eller klik her</a></div>',
+		'redir-logoutdel'	=> '<div class="redir">Du vil blive logget ud og omdirigeret til forsiden om <span id="counter">5</span> sekunder... <a href="'.$basedir.'?logout">eller klik her</a></div>',
 
 	// ****************************** WISHLIST OPERATIONS *************************************************
 	
@@ -71,7 +67,6 @@ $lang = array(
 		'cancelgoback'		=> '<span style="font-size: .8em;">&#10094; Fortryd og gå tilbage</span>',
 		'wishisdeleted'		=> 'Dit ønske er slettet.',
 		'wishnotdeleted'	=> 'Dit ønske kunne ikke slettes.',
-		// 'wishlistredir'		=> 'Redirecting you to your wishlist in <span id="counter">3</span> seconds...',
 		'editwish'			=> 'Redig&eacute;r ønske',
 		'wishupdated'		=> 'Dit ønske er opdateret.',
 		'wishnotupdated'	=> 'Dit ønske blev ikke opdateret. Måske er du blevet logget af, eller også har du ikke foretaget nogen ændringer.',
@@ -99,7 +94,7 @@ $lang = array(
 		'passnotmatch'		=> 'Adgangskoderne stemmer ikke overens.',
 		'invitenotcorrect'	=> 'Invitationskoden er ikke korrekt.',
 		'emailinuse'		=> 'Den indtastede email-adresse er allerede i brug. <a href="login.php?do=lostpwd">Glemt adgangskode?</a>',
-		'usersignup-suc'	=> 'Du er nu registreret, og dine logininformationer er sendt til <b>'.x($_POST['email']).'</b>.',
+		'usersignup-suc'	=> "Du er nu registreret, og dine logininformationer er sendt til <b>{$email}</b>",
 		'usersignup-err'	=> 'Der er opstået en fejl. Prøv igen senere, eller kontakt administratoren.',
 		'delete-note'		=> 'Indtast din email-adresse i feltet herover, og tryk <span style="color: #fff;">SLET BRUGERPROFIL</span>. Det kan ikke fortrydes!',
 		'del-userres'		=> 'Dine reservationer er slettet',
@@ -117,7 +112,7 @@ $lang = array(
 		'fgp-authok'		=> 'Check din email for nulstillingsvejledningen.',
 		'fgp-autherr'		=> 'Der er opstået en fejl. Enten er din email-adresse ikke genkendt, eller også er der en verserende nulstilling i gang. Du bør kontakt administratoren hvis problemet fortsætter.',
 		'fgp-mismatch'		=> 'Der er opstået en fejl. Du bør kontakte administratoren hvis problemet fortsætter.',
-		'fgp-redir-index'	=> '<div class="redir">Omdirigerer dig til forsiden om <span id="counter">10</span> sekunder... <a href="'.$server.'">eller klik her</a></div>',
+		'fgp-redir-index'	=> "<div class=\"redir\">Omdirigerer dig til forsiden om <span id=\"counter\">10</span> seconds... <a href=\"{$basedir}\">eller klik her</a></div>",
 		'newpwd-passheader'	=> 'Nulstil din adgangskode',
 		'newpwd-pass'		=> 'Indtast din nye adgangskode',
 		'newpwd-passconf'	=> 'Bekræft din nye adgangskode',
@@ -129,10 +124,10 @@ $lang = array(
 
 		'mail-subject'		=> "Registrering på ".SITENAME."",
 		
-		'mail-body'			=> "Hej ".x($_POST['username']).", og velkommen til ".SITENAME."!<br /><br />
+		'mail-body'			=> "Hej {$username}, og velkommen til ".SITENAME."!<br /><br />
 								Dine logininformationer er som følger:<br /><br />
-								<b>Email-addresse: ".x($_POST['email'])."<br />
-								Adgangskode: ".x($_POST['password'])."</b><br /><br />",
+								<b>Email-addresse: {$email}<br />
+								Adgangskode: {$password}</b><br /><br />",
 								
 		'mail-sign'			=> 'Med venlig hilsen<br />'.SITENAME.'',
 		
@@ -146,13 +141,13 @@ $lang = array(
 		'crtadm-title'		=> 'Opret administratorprofil',
 		'crtadm-desc'		=> 'Første skridt på vejener er at oprette en administratorprofil, så du kan få lidt kontrol over siden. Du vil få nogle ekstra menupunkter i navigationsbaren, så du nemt kan slette ønsker (for at genbruge scriptet til næste jul), eller slette databasen fuldstændig.<br /><br />På den måde behøver du ikke logge ind i databasen fra tid til anden for at udføre administrative handlinger (og "ved et uheld" se hvilke gaver du kan regne med at få :)...',
 		'crtadm-passnote'	=> 'Bare rolig, scriptet bruger Eksblowfish hashing-algoritme til at kryptere adgangskoder :)',
-		'adminok'			=> 'Administratorprofil er oprettet. Det er meget vigtigt, du enten sletter eller omdøber filen <code>'.$server.'/admin/createadmin.php</code> omgående, så andre ikke kan opnå administratorrettigheder til din side.',
+		'adminok'			=> 'Administratorprofil er oprettet. Det er meget vigtigt, du enten sletter eller omdøber filen <code>'.$basedir.'admin/createadmin.php</code> omgående, så andre ikke kan opnå administratorrettigheder til din side.',
 		'adminerr'			=> 'Administratorprofil blev ikke oprettet - check din konfiguration.',
 		'adm-delwish-title'	=> 'Slet ønsker',
 		'adm-delwish-desc'	=> 'Dette vil slette alle ønsker i databasen, men bevare brugerinformationerne. Klik på afkrydsningsfeltet herunder og tryk OK for at udføre handlingen.',
 		'adm-delwish-conf'	=> 'Ja, jeg vil slette alle ønsker i databasen, men bevare brugerinformationerne.',
 		'adm-delall-title'	=> 'Slet alt',
-		'adm-delall-desc'	=> 'Dette vil slette alt i databasen - ønsker og brugerinformation, inklusive administratorprofilen! Du skal køre filen <code>'.$server.'/admin/createadmin.php</code> igen for at oprette en ny administratorprofil. Når du trykker OK, vil alt blive slettet, og du vil blive logget ud. Klik på afkrydsningsfeltet herunder og tryk OK for at udføre handlingen.',
+		'adm-delall-desc'	=> 'Dette vil slette alt i databasen - ønsker og brugerinformation, inklusive administratorprofilen! Du skal køre filen <code>'.$basedir.'admin/createadmin.php</code> igen for at oprette en ny administratorprofil. Når du trykker OK, vil alt blive slettet, og du vil blive logget ud. Klik på afkrydsningsfeltet herunder og tryk OK for at udføre handlingen.',
 		'adm-delall-conf'	=> 'Ja, jeg vil slette alt i databasen, inklusive administratorprofilen.',
 		'adm-del-submit'	=> 'OK',
 		'adm-delgift-ok'	=> 'Tabellen `gifts` er tømt',

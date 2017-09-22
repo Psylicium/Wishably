@@ -68,9 +68,9 @@ if (isset($_POST['submit'])) {
 			echo $lang['redir-logoutdel'];
 			echo '</div>';
 			
-			// Unsetting cookie and redirect to index page
+			// Redirect to index page, logging out
 			echo '<script src="js.js"></script>';
-			header("refresh:5;url=/?logout=true" );
+			header("refresh:5;url={$basedir}?logout" );
 		
 		}
 		

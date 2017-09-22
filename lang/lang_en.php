@@ -18,9 +18,6 @@ English translation by: Henrik Mortensen (www.psylicium.dk)
 
 */
 
-// For sanitizing POST data in the email
-function x($string) { return htmlentities($string, ENT_QUOTES, 'UTF-8', false); }
-
 $lang = array(
 	
 	// ****************************** NAVIGATION BAR ******************************************************
@@ -49,10 +46,10 @@ $lang = array(
 		'tbl_wishedby'		=> 'Wished by',
 		'tbl_actions'		=> 'Actions',
 		'tbl_linkalt'		=> 'Click to go to this page (opens in a new tab)',
-		'redir-index'		=> '<div class="redir">Redirecting you to the index page in <span id="counter">5</span> seconds... <a href="'.$server.'">or click here</a></div>',
-		'redir-wishlist'	=> '<div class="redir">Redirecting you to your wishlist in <span id="counter">5</span> seconds... <a href="'.$server.'/mylist.php">or click here</a></div>',
-		'redir-reservation'	=> '<div class="redir">Redirecting you to your reservations in <span id="counter">5</span> seconds... <a href="'.$server.'/gift.php?do=myreservations">or click here</a></div>',
-		'redir-logoutdel'	=> '<div class="redir">You will be logged out and redirected to the index page in <span id="counter">5</span> seconds... <a href="'.$server.'/?do=logout">or click here</a></div>',
+		'redir-index'		=> '<div class="redir">Redirecting you to the index page in <span id="counter">5</span> seconds... <a href="'.$basedir.'">or click here</a></div>',
+		'redir-wishlist'	=> '<div class="redir">Redirecting you to your wishlist in <span id="counter">5</span> seconds... <a href="'.$basedir.'mylist.php">or click here</a></div>',
+		'redir-reservation'	=> '<div class="redir">Redirecting you to your reservations in <span id="counter">5</span> seconds... <a href="'.$basedir.'gift.php?do=myreservations">or click here</a></div>',
+		'redir-logoutdel'	=> '<div class="redir">You will be logged out and redirected to the index page in <span id="counter">5</span> seconds... <a href="'.$basedir.'?logout">or click here</a></div>',
 
 	// ****************************** WISHLIST OPERATIONS *************************************************
 	
@@ -96,8 +93,8 @@ $lang = array(
 		'reg-invitenote'	=> 'Enter the invite code you have received from the administrator.',
 		'passnotmatch'		=> 'The passwords do not match.',
 		'invitenotcorrect'	=> 'The invitation code is not correct.',
-		'emailinuse'		=> 'The email address you entered is already in use. <a href="login.php?do=lostpwd">Glemt adgangskode?</a>',
-		'usersignup-suc'	=> 'You are now registered, and your login details has been sent to <b>'.x($_POST['email']).'</b>.',
+		'emailinuse'		=> 'The email address you entered is already in use. <a href="login.php?do=lostpwd">Forgot your password?</a>',
+		'usersignup-suc'	=> "You are now registered, and your login details has been sent to <b>{$email}</b>.",
 		'usersignup-err'	=> 'An error occured. Try again later, or contact the administrator.',
 		'delete-note'		=> 'Enter your email address in the field above, and click <span style="color: #fff;">DELETE USER PROFILE</span>. This cannot be undone!',
 		'del-userres'		=> 'Your reservations are deleted',
@@ -115,7 +112,7 @@ $lang = array(
 		'fgp-authok'		=> 'Check your email for the password reset instructions',
 		'fgp-autherr'		=> 'There was an error. Either your email isn\'t recognized, or a reset is pending. You may want to contact the administrator if the problem persists.',
 		'fgp-mismatch'		=> 'There was an error. You may want to contact the administrator if the problem persists.',
-		'fgp-redir-index'	=> '<div class="redir">Redirecting you to the index page in <span id="counter">10</span> seconds... <a href="'.$server.'">or click here</a></div>',
+		'fgp-redir-index'	=> "<div class=\"redir\">Redirecting you to the index page in <span id=\"counter\">10</span> seconds... <a href=\"{$basedir}\">or click here</a></div>",
 		'newpwd-passheader'	=> 'Reset your password',
 		'newpwd-pass'		=> 'Enter your new password',
 		'newpwd-passconf'	=> 'Confirm your new password',
@@ -127,10 +124,10 @@ $lang = array(
 
 		'mail-subject'		=> "Registration at ".SITENAME."",
 		
-		'mail-body'			=> "Hi ".x($_POST['username']).", and welcome to ".SITENAME."!<br /><br />
+		'mail-body'			=> "Hi {$username}, and welcome to ".SITENAME."!<br /><br />
 								Your login details are as follows:<br /><br />
-								<b>Email address: ".x($_POST['email'])."<br />
-								Password: ".x($_POST['password'])."</b><br /><br />",
+								<b>Email address: {$email}<br />
+								Password: {$password}</b><br /><br />",
 		
 		'mail-sign'			=> 'Regards,<br />'.SITENAME.'',
 		
@@ -144,16 +141,16 @@ $lang = array(
 		'crtadm-title'		=> 'Create administrator profile',
 		'crtadm-desc'		=> 'The first step is to create an administrator profile, so you have some control over the site. You will get some extra options in the navigation bar for easy deletion of wishes (to reuse the script next christmas), and to wipe the database completely for a fresh start.<br /><br />That way, you won\'t have to login to the database from time to time to perform administrative tasks (and "accidentally" get a sneak peek of what gifts you can expect :)...',
 		'crtadm-passnote'	=> 'Don\'t worry, the site uses Eksblowfish hashing algorithm to encrypt passwords :)',
-		'adminok'			=> 'Admin profile created. It is very important that you either delete or rename the file <code>'.$server.'/admin/createadmin.php</code> right away, to prevent others from gaining administrator rights to your site.',
+		'adminok'			=> 'Admin profile created. It is very important that you either delete or rename the file <code>'.$basedir.'admin/createadmin.php</code> right away to prevent others from gaining administrator rights to your site.',
 		'adminerr'			=> 'Admin profile not created - check your configuration.',
 		'adm-delwish-title'	=> 'Delete wishes',
 		'adm-delwish-desc'	=> 'This will delete all wishes from the database, but keep the user information. Click the checkbox below and click OK to perform the action.',
 		'adm-delwish-conf'	=> 'Yes, I want to delete all wishes from the database, but keep the user information.',
 		'adm-delall-title'	=> 'Delete everything',
-		'adm-delall-desc'	=> 'This will delete everything in the database - wish entries and user information, including the administrator profile! You must run the file <code>'.$server.'/admin/createadmin.php</code> again to create a new administrator profile. Once you click OK, everything will be deleted, and you will be logged out. Click the checkbox below and click OK to perform the action.',
+		'adm-delall-desc'	=> 'This will delete everything in the database - wish entries and user information, including the administrator profile! You must run the file <code>'.$basedir.'/admin/createadmin.php</code> again to create a new administrator profile. Once you click OK, everything will be deleted, and you will be logged out. Click the checkbox below and click OK to perform the action.',
 		'adm-delall-conf'	=> 'Yes, I want to clear all tables in the database, including the administrator profile.',
 		'adm-del-submit'	=> 'OK',
-		'adm-delgift-ok'	=> 'Tabellen `gifts` is cleared',
+		'adm-delgift-ok'	=> 'The table `gifts` is cleared',
 		'adm-delgift-err'	=> 'The table `gifts` was not cleared: ',
 		'adm-deluser-ok'	=> 'The table `users` is cleared',
 		'adm-deluser-err'	=> 'The table `users` was not cleared: '

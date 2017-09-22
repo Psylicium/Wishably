@@ -2,15 +2,7 @@
 include("../func.php");
 ?>
 
-<?php
-
-if ($_GET['logout'] == "true" ) {
-	unset($_COOKIE["UID"]);
-	setcookie("UID", "", time()-3600);
-}
-
-include("../conxion.php");
-?>
+<?php include("../conxion.php"); ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -24,7 +16,7 @@ include("../conxion.php");
 <div class="headerbar headerbar-admin">
 
 <ul>
-		<li><p><a class="frontpage" href="<?php echo $server; ?>">&#10094; <?php echo $lang['toindexpage']; ?></a></p></li>
+		<li><p><a class="frontpage" href="<?php echo $basedir; ?>">&#10094; <?php echo $lang['toindexpage']; ?></a></p></li>
 		<li><p>ADMINISTRATOR</p></li>
 	</ul>
 

@@ -4,7 +4,7 @@
 
 // Check if the user is logged in, and redirect to index page if not
 if (!isset($_COOKIE["UID"])) {
-	header("Location:/");
+	header("Location:{$basedir}");
 } else {
 
 	include("../conxion.php");
@@ -18,7 +18,7 @@ if (!isset($_COOKIE["UID"])) {
 	
 	// If the user is logged in, but not admin, redirect to index page
 	if ($admin == FALSE) {
-			header("Location:/");
+			header("Location:{$basedir}");
 	}
 } 
 
@@ -50,7 +50,7 @@ switch ($_GET['do']) {
 			echo '</div>';
 			
 			echo '<script src="../js.js"></script>';
-			header("refresh:5;url=".$server );
+			header("refresh:5;url={$basedir}");
 			
 			exit;	
 			
@@ -58,7 +58,7 @@ switch ($_GET['do']) {
 	
 		<h1><?php echo $lang['adm-delwish-title']; ?></h1>
 		<p><?php echo $lang['adm-delwish-desc']; ?></p>
-		<form class="login" action="<?php echo htmlspecialchars($server . $_SERVER['REQUEST_URI']); ?>" method="POST">
+		<form class="login" action="<?php echo htmlspecialchars($_SERVER['REQUEST_URI']); ?>" method="POST">
 		<div class="checkbox"><input type="checkbox" id="mos8580" name="confirm" value="yes" />
 		<label for="mos8580"><span></span><?php echo $lang['adm-delwish-conf']; ?></label>
 		<button id="singlebutton" name="submit" class="submit"><?php echo $lang['adm-del-submit']; ?></button></div>
@@ -103,7 +103,7 @@ switch ($_GET['do']) {
 			echo '</div>';
 			
 			echo '<script src="../js.js"></script>';
-			header("refresh:5;url=/?logout=true" );
+			header("refresh:5;url={$basedir}?logout");
 			
 			exit;
 			
@@ -112,7 +112,7 @@ switch ($_GET['do']) {
 		<h1><?php echo $lang['adm-delall-title']; ?></h1>
 		<p><?php echo $lang['adm-delall-desc']; ?></p>
 		
-		<form class="login" action="<?php echo htmlspecialchars($server . $_SERVER['REQUEST_URI']); ?>" method="POST">
+		<form class="login" action="<?php echo htmlspecialchars($_SERVER['REQUEST_URI']); ?>" method="POST">
 		<div class="checkbox"><input type="checkbox" id="mos8580" name="confirm" value="yes" />
 		<label for="mos8580"><span></span><?php echo $lang['adm-delall-conf']; ?></label>
 		<button id="singlebutton" name="submit" class="submit"><?php echo $lang['adm-del-submit']; ?></button></div>
@@ -121,7 +121,7 @@ switch ($_GET['do']) {
 	
 	// Accessing the page directly redirects to index page. Nothing to see here...
 	default:
-	header("Location:/");
+	header("Location:{$basedir}");
 	break;
 	
 } ?>

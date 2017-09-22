@@ -4,10 +4,10 @@ include("func.php");
 
 <?php
 
-if ($_GET['logout'] == "true" ) {
+if (isset($_GET['logout'])) {
 	session_unset();
 	unset($_COOKIE["UID"]);
-	setcookie("UID", "", time()-3600);	
+	setcookie("UID", "", time()-3600);
 }
 
 include("conxion.php");
@@ -38,16 +38,15 @@ include("conxion.php");
 	if (($stmt->num_rows) == 0 ) {
 		header("Location:/?logout=true");
 	} ?>
-	
 	<ul>
 		<li><p><a class="frontpage" href="<?php echo $basedir; ?>">&#10094; <?php echo $lang['toindexpage']; ?></a></p></li>
-		<li><p><?php echo $lang['loggedinas']; ?> <?php echo $username; ?> (<a class="logout" href="logout.php"><?php echo $lang['logout']; ?></a>)</p></li>
+		<li><p><?php echo $lang['loggedinas']; ?> <?php echo $username; ?> (<a class="logout" href="<?php echo $basedir; ?>?logout"><?php echo $lang['logout']; ?></a>)</p></li>
 		<li><a href="mylist.php"><?php echo $lang['mywishlist']; ?></a></li>
 		<li><a href="gift.php?do=myreservations"><?php echo $lang['myreservations']; ?></a></li>
 		<li><p><a class="deleteuser" href="delete.php"><?php echo $lang['deleteuser']; ?></a></p></li>
 		<?php if ($admin == TRUE) { ?>
-			<li class="admin"><a href="/admin/admin.php?do=delwish"><?php echo $lang['adm-delwish']; ?></a></li>
-			<li class="admin"><a href="/admin/admin.php?do=delall"><?php echo $lang['adm-delall']; ?></a></li>
+			<li class="admin"><a href="<?php echo $basedir; ?>admin/admin.php?do=delwish"><?php echo $lang['adm-delwish']; ?></a></li>
+			<li class="admin"><a href="<?php echo $basedir; ?>admin/admin.php?do=delall"><?php echo $lang['adm-delall']; ?></a></li>
 		<?php } ?>
 	</ul>
 

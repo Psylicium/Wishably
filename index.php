@@ -36,6 +36,7 @@ if (isset($_COOKIE["UID"])) {
 	
 	if ( $display_users == 1 ) { 
 		// List registered users
+		$users = "";
 		include("conxion.php");
 		$sql = "SELECT id, username FROM users ORDER BY id ASC";
 		$stmt = $db_conx->prepare($sql);

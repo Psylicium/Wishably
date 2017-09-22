@@ -1,16 +1,16 @@
 <?php
 
 // Database host
-$dbhost     = "<YOUR_DATABASE_ADDRESS>";
+$dbhost     = "";
 
 // Database username
-$dbusername = "<DATABASE_USERNAME>";
+$dbusername = "";
 
 // Database password
-$dbpassword = "<DATABASE_PASSWORD>";
+$dbpassword = "";
 
 // Database name
-$dbname     = "<DATABASE_NAME>";
+$dbname     = "";
 
 // Connect to database
 $db_conx = new mysqli($dbhost, $dbusername, $dbpassword, $dbname);

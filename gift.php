@@ -141,8 +141,8 @@ case "delete":
 			
 			<form class="padding" action="gift.php?do=addnew" method="POST">
 				<fieldset>		
-					<input id="textinput" name="gift-desc" type="text" placeholder="<?php echo $lang['ph_yourwish']; ?>" class="" value="<?php echo $gift_desc; ?>" required autofocus>
-					<input id="textinput" name="gift-link" type="url" pattern="https?://.+" placeholder="<?php echo $lang['ph_onlinebuy']; ?>" class="input-nopad" value="<?php echo $gift_link; ?>">
+					<input id="textinput" name="gift-desc" type="text" placeholder="<?php echo $lang['ph_yourwish']; ?>" class="" required autofocus>
+					<input id="textinput" name="gift-link" type="url" pattern="https?://.+" placeholder="<?php echo $lang['ph_onlinebuy']; ?>" class="input-nopad">
 					<div class="input-note"><?php echo $lang['note_url']; ?></div>
 					<button id="singlebutton" name="submit" class="submit"><?php echo $lang['savechanges']; ?></button>
 				</fieldset>
