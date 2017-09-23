@@ -16,7 +16,7 @@ include("conxion.php");
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Ønskesedlen</title>
+	<title><?php echo SITENAME; ?></title>
 	<link rel="stylesheet" href="global.css">
 </head>
 <body>
